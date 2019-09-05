@@ -1,4 +1,4 @@
-package com.imooc.o2o.web;
+package com.imooc.o2o.web.superadmin;
 
 import com.imooc.o2o.entity.Area;
 import com.imooc.o2o.service.AreaService;
