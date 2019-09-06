@@ -3,7 +3,7 @@ package com.imooc.o2o.entity;
 import java.util.Date;
 
 public class Area {
-    private Long areaId;
+    private Integer areaId;
     private String areaName;
     private String areaDesc;
     //权重
@@ -11,11 +11,11 @@ public class Area {
     private Date createTime;
     private Date lastEditTime;
 
-    public Long getAreaId() {
+    public Integer getAreaId() {
         return areaId;
     }
 
-    public void setAreaId(Long areaId) {
+    public void setAreaId(Integer areaId) {
         this.areaId = areaId;
     }
 
