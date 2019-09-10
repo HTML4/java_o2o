@@ -15,14 +15,14 @@ public class ImageUtil {
     private static  String basePath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
-    public static String generateThumbnail(CommonsMultipartFile thumbnail, String targetAddr) {
+    public static String generateThumbnail(File thumbnail, String targetAddr) {
         String realFileName = getRandomFileName();
         String extension = getFileExtension(thumbnail);
         makeDirPath(targetAddr);
         String relativeAddr = targetAddr + realFileName + extension;
         File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
         try {
-            Thumbnails.of(thumbnail.getInputStream()).size(200, 200)
+            Thumbnails.of(thumbnail).size(200, 200)
                     .watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "/login.png")), 0.25f)
                     .outputQuality(0.8f).toFile(dest);
         } catch (IOException e) {
@@ -50,8 +50,8 @@ public class ImageUtil {
      * @param cFile
      * @return
      */
-    private static String getFileExtension(CommonsMultipartFile cFile){
-        String originalFileName = cFile.getOriginalFilename();  //获取文件名
+    private static String getFileExtension(File cFile){
+        String originalFileName = cFile.getName();  //获取文件名
         return originalFileName.substring(originalFileName.lastIndexOf("."));
     }
     /**

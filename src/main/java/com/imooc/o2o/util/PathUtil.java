@@ -8,7 +8,7 @@ public class PathUtil {
         if(os.toLowerCase().startsWith("win")){
             basePath = "D:/eclipseWorkspace/image/";
         } else {
-            basePath = "/home/xiangze/image/";
+            basePath = "/Users/jason/eclipse-workspace/upload/";
         }
         basePath = basePath.replace("/", seperator);
         return basePath;
