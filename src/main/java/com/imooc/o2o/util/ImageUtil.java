@@ -16,6 +16,7 @@ public class ImageUtil {
     private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
     private static final Random r = new Random();
     public static String generateThumbnail(File thumbnail, String targetAddr) {
+
         String realFileName = getRandomFileName();
         String extension = getFileExtension(thumbnail);
         makeDirPath(targetAddr);
@@ -28,7 +29,7 @@ public class ImageUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+        return relativeAddr;
     }
 
     /**

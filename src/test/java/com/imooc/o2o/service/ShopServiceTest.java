@@ -35,13 +35,14 @@ public class ShopServiceTest extends BaseTest {
 		shop.setShopDesc("mytest1");
 		shop.setShopAddr("testaddr1");
 		shop.setPhone("13810524526");
-		shop.setShopImg("test1");
+		//shop.setShopImg("test1");
 		shop.setCreateTime(new Date());
 		shop.setLastEditTime(new Date());
 		shop.setEnableStatus(0);
 		shop.setAdvice("审核中");
 		shop.setArea(area);
 		shop.setShopCategory(shopCategory);
+		//D:\code\hcredits-frontend\build\images\b1.553c69e9.jpg
 		File shopImg = new File("/Users/jason/Downloads/fced2360ecef903460f25be013ab25cc_2_3_art.png");
         ShopExecution se = shopService.addShop(shop, shopImg);
 		assertEquals(ShopStateEnum.CHECK.getState(), se.getState());
