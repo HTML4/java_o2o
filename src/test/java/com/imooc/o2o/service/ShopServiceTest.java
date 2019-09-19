@@ -11,6 +11,9 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Date;
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +25,7 @@ public class ShopServiceTest extends BaseTest {
     private ShopService shopService;
 
     @Test
-    public void testAddShop(){
+    public void testAddShop() throws FileNotFoundException {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
 		Area area = new Area();
@@ -31,9 +34,9 @@ public class ShopServiceTest extends BaseTest {
 		ShopCategory shopCategory = new ShopCategory();
 		shopCategory.setShopCategoryId(1L);
         shop.setOwner(owner);
-		shop.setShopName("mytest1");
-		shop.setShopDesc("mytest1");
-		shop.setShopAddr("testaddr1");
+		shop.setShopName("mytest2");
+		shop.setShopDesc("mytest2");
+		shop.setShopAddr("testaddr2");
 		shop.setPhone("13810524526");
 		//shop.setShopImg("test1");
 		shop.setCreateTime(new Date());
@@ -44,7 +47,8 @@ public class ShopServiceTest extends BaseTest {
 		shop.setShopCategory(shopCategory);
 		//D:\code\hcredits-frontend\build\images\b1.553c69e9.jpg
 		File shopImg = new File("/Users/jason/Downloads/fced2360ecef903460f25be013ab25cc_2_3_art.png");
-        ShopExecution se = shopService.addShop(shop, shopImg);
+		InputStream is = new FileInputStream(shopImg);
+        ShopExecution se = shopService.addShop(shop, is, shopImg.getName());
 		assertEquals(ShopStateEnum.CHECK.getState(), se.getState());
     }
 }
