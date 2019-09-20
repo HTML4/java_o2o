@@ -1,6 +1,7 @@
 $(function(){
     var initUrl = '/o2o/shopadmin/getshopinitinfo';
     var registerShopUrl = '/o2o/shopadmin/registershop';
+    getShopInitInfo();
     function getShopInitInfo() {
         $.getJSON(initUrl, function (data) {
             if(data.success) {
@@ -15,11 +16,11 @@ $(function(){
                         item.areaName + '</option>';
                 });
                 $("#shop-category").html(tempHtml);
-                $("#area").html(tempAreaHtml);
+                $("#shop-area").html(tempAreaHtml);
             }
         })
     }
-    getShopInitInfo();
+
     $("#submit").click(function(){
         var shop = {};
         shop.shopName = $("#shop-name").val();
@@ -52,7 +53,7 @@ $(function(){
             type: "POST",
             data: formData,
             contentType: false,
-            proceesData: false,
+            proccessData: false,
             cache: false,
             success: function(data) {
                 if(data.success) {
