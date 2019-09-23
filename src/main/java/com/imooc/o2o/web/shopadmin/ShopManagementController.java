@@ -95,6 +95,7 @@ public class ShopManagementController {
         if(shop != null && shopImg != null) {
             PersonInfo owner = new PersonInfo();
             owner.setUserId(1L);
+            shop.setOwner(owner);
             ShopExecution se;
             try {
                 se = shopService.addShop(shop, shopImg.getInputStream(), shopImg.getOriginalFilename());

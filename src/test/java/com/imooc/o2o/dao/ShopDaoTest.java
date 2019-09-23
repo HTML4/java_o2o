@@ -16,7 +16,13 @@ public class ShopDaoTest extends BaseTest {
     @Autowired
     private ShopDao shopDao;
     @Test
-    @Ignore
+    public void testQueryByShopId(){
+        Shop shop = shopDao.queryByShopId(1L);
+        System.out.println("area_id:" + shop.getArea().getAreaId());
+        System.out.println("area_name:" + shop.getArea().getAreaName());
+    }
+    @Test
+    @Ignore     //不执行
     public void testInsertShop(){
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();
@@ -40,6 +46,7 @@ public class ShopDaoTest extends BaseTest {
         assertEquals(1, rowCount);
     }
     @Test
+    @Ignore
     public void testUpdateShop(){
         Shop shop = new Shop();
         shop.setShopId(1L);

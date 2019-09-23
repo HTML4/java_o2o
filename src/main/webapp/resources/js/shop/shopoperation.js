@@ -1,6 +1,6 @@
 $(function(){
-    var initUrl = '/o2o/shopadmin/getshopinitinfo';
-    var registerShopUrl = '/o2o/shopadmin/registershop';
+    var initUrl = '/shopadmin/getshopinitinfo';
+    var registerShopUrl = '/shopadmin/registershop';
     getShopInitInfo();
     function getShopInitInfo() {
         $.getJSON(initUrl, function (data) {
@@ -27,19 +27,19 @@ $(function(){
         shop.shopAddr = $("#shop-addr").val();
         shop.phone = $("#shop-phone").val();
         shop.shopDesc = $("#shop-desc").val();
-        // shop.shopCategory = {
-        //     shopCategoryId: $("#shop-category").find("option").not(function(){
-        //         return !this.selected;
-        //     }).data("id")
-        // };
-        // shop.area = {
-        //     areaId: $("#area").find("option").not(function(){
-        //         return !this.selected;
-        //     }).data("id")
-        // };
-        // var shopImg = $("#shop-img")[0].files[0];
+         shop.shopCategory = {
+             shopCategoryId: $("#shop-category").find("option").not(function(){
+                 return !this.selected;
+             }).data("id")
+         };
+         shop.area = {
+             areaId: $("#shop-area").find("option").not(function(){
+                 return !this.selected;
+             }).data("id")
+         };
+         var shopImg = $("#shop-img")[0].files[0];
          var formData = new FormData();
-        // formData.append("shopImg", shopImg);
+         formData.append("shopImg", shopImg);
         formData.append("shopStr", JSON.stringify(shop));
         var verifyCodeActual = $("#j_captcha").val();
         if(!verifyCodeActual){
@@ -47,19 +47,19 @@ $(function(){
             return;
         }
         formData.append("verifyCodeActual", verifyCodeActual);
-        console.log("formData", verifyCodeActual)
+
         $.ajax({
             url: registerShopUrl,
             type: "POST",
             data: formData,
             contentType: false,
-            proccessData: false,
+            processData: false,
             cache: false,
             success: function(data) {
                 if(data.success) {
                     $.toast("提交成功！")
                 } else {
-                    $.toast("提交失败！" + data.err)
+                    $.toast("提交失败！" + data.errMsg)
                 }
                 $("#captcha_img").click()
             }
