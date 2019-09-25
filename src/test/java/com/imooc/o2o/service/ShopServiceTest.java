@@ -7,6 +7,8 @@ import com.imooc.o2o.entity.PersonInfo;
 import com.imooc.o2o.entity.Shop;
 import com.imooc.o2o.entity.ShopCategory;
 import com.imooc.o2o.enums.ShopStateEnum;
+import com.imooc.o2o.exceptions.ShopOperationException;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +27,27 @@ public class ShopServiceTest extends BaseTest {
     private ShopService shopService;
 
     @Test
+	public void testGetShopList(){
+		Shop shopCondition = new Shop();
+		ShopCategory sc = new ShopCategory();
+		sc.setShopCategoryId(3L);
+		shopCondition.setShopCategory(sc);
+		ShopExecution se = shopService.getShopList(shopCondition, 0, 2);
+		System.out.println("店铺列表数为：" +  se.getShopList().size());
+	}
+    @Test
+	@Ignore
+	public void testModifyShop() throws ShopOperationException, FileNotFoundException{
+		Shop shop = new Shop();
+		shop.setShopId(1L);
+		shop.setShopName("修改后的店铺名称");
+		File shopImg = new File("D:\\code\\hcredits-frontend\\build\\images\\banner.jpg");
+		InputStream is = new FileInputStream(shopImg);
+		ShopExecution se = shopService.modifyShop(shop, is, "banner.jpg");
+		System.out.println("修改后的图片：" + se.getShop().getShopImg());
+	}
+    @Test
+	@Ignore
     public void testAddShop() throws FileNotFoundException {
         Shop shop = new Shop();
         PersonInfo owner = new PersonInfo();

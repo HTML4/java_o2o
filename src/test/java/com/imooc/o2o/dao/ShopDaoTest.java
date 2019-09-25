@@ -11,11 +11,31 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.Assert.assertEquals;
 
 import java.util.Date;
+import java.util.List;
 
 public class ShopDaoTest extends BaseTest {
     @Autowired
     private ShopDao shopDao;
     @Test
+    public void testQueryShopList(){
+        Shop shopCondition = new Shop();
+        PersonInfo owner = new PersonInfo();
+        owner.setUserId(1L);
+        shopCondition.setOwner(owner);
+        List<Shop> shopList = shopDao.queryShopList(shopCondition, 0, 5);
+        int count =shopDao.queryShopCount(shopCondition);
+        System.out.println("店铺列表："+shopList.size());
+        System.out.println("店铺总数："+count);
+        ShopCategory sc = new ShopCategory();
+        sc.setShopCategoryId(3L);
+        shopCondition.setShopCategory(sc);
+        shopList = shopDao.queryShopList(shopCondition, 0, 2);
+        System.out.println("xxx店铺列表："+shopList.size());
+        count =shopDao.queryShopCount(shopCondition);
+        System.out.println("xxx店铺总数："+count);
+    }
+    @Test
+    @Ignore
     public void testQueryByShopId(){
         Shop shop = shopDao.queryByShopId(1L);
         System.out.println("area_id:" + shop.getArea().getAreaId());
