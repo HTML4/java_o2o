@@ -58,7 +58,6 @@ $(function() {
 						});
 	}
 	getList();
-
 	$('#submit').click(function() {
 		var tempArr = $('.temp');
 		var productCategoryList = [];
