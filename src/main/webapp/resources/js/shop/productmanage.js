@@ -84,18 +84,18 @@ $(function() {
 					function(e) {
 						var target = $(e.currentTarget);
 						if (target.hasClass('edit')) {
-							window.location.href = '/myo2o/shop/productedit?productId='
+							window.location.href = '/shopadmin/productedit?productId='
 									+ e.currentTarget.dataset.id;
 						} else if (target.hasClass('delete')) {
 							deleteItem(e.currentTarget.dataset.id,
 									e.currentTarget.dataset.status);
 						} else if (target.hasClass('preview')) {
-							window.location.href = '/myo2o/frontend/productdetail?productId='
+							window.location.href = '/frontend/productdetail?productId='
 									+ e.currentTarget.dataset.id;
 						}
 					});
 
 	$('#new').click(function() {
-		window.location.href = '/myo2o/shop/productedit';
+		window.location.href = '/shopadmin/productedit';
 	});
 });

@@ -32,8 +32,6 @@
     <delete id="deleteProductImg" parameterType="map">
         delete from tb_product_img
         where
-        product_img_id = #{productImgId}
-        and
         product_id = #{productId}
     </delete>
 </mapper>

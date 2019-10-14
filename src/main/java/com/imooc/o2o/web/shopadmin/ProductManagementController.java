@@ -95,9 +95,7 @@ public class ProductManagementController {
             try {
                 //从session中获取当前店铺的Id并赋值给product，减少对前端数据的依赖
                 Shop currentShop = (Shop) request.getSession().getAttribute("currentShop");
-                Shop shop = new Shop();
-                shop.setShopId(currentShop.getShopId());
-                product.setShop(shop);
+                product.setShop(currentShop);
                 //执行添加操作
                 ProductExecution pe = productService.addProduct(product, thumbnail, productImgList);
                 if(pe.getState() == ProductStateEnum.SUCCESS.getState()) {
@@ -114,6 +112,52 @@ public class ProductManagementController {
         } else {
             modelMap.put("success", false);
             modelMap.put("errMsg", "请输入商品信息");
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/listproductsbyshop", method = RequestMethod.GET)
+    @ResponseBody
+    private Map<String, Object> listProductsByShop(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        long shopId = HttpServletRequestUtil.getLong(request, "shopId");
+        int pageIndex = HttpServletRequestUtil.getInt(request, "pageIndex");
+        int pageSize = HttpServletRequestUtil.getInt(request, "pageSize");
+        if(shopId > 0) {
+            ProductExecution pe = productService.queryProductList(shopId, pageIndex, pageSize);
+            if(pe.getState() == ProductStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                modelMap.put("productList", pe.getProductList());
+                modelMap.put("count", pe.getCount());
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", pe.getStateInfo());
+            }
+
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "参数错误");
+        }
+        return modelMap;
+    }
+
+    @RequestMapping(value = "/getproductbyid", method = RequestMethod.GET)
+    @ResponseBody
+    Map<String, Object> getProductById(HttpServletRequest request) {
+        Map<String, Object> modelMap = new HashMap<String, Object>();
+        long productId = HttpServletRequestUtil.getLong(request, "productId");
+        if(productId > 0) {
+            ProductExecution pe = productService.queryProudctById(productId);
+            if(pe.getState() == ProductStateEnum.SUCCESS.getState()) {
+                modelMap.put("success", true);
+                modelMap.put("product", pe.getProduct());
+            } else {
+                modelMap.put("success", false);
+                modelMap.put("errMsg", pe.getStateInfo());
+            }
+        } else {
+            modelMap.put("success", false);
+            modelMap.put("errMsg", "参数错误");
         }
         return modelMap;
     }

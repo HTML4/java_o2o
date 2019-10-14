@@ -32,4 +32,9 @@ public class ProductDaoTest extends BaseTest {
         int rowCount = productDao.insertProduct(product);
         assertEquals(1, rowCount);
     }
+    @Test
+    public void testQueryProduct(){
+        Product product = productDao.queryProductByProductId(5L);
+        System.out.println(product.getProductId());
+    }
 }

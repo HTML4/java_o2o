@@ -51,7 +51,7 @@ public class ProductImgDaoTest extends BaseTest {
         List<ProductImg> productImgList = productImgDao.queryProductImgByProductId(productId);
         for (ProductImg pi: productImgList) {
             if("图片1".equals(pi.getImgAddr()) || "图片2".equals(pi.getImgAddr())) {
-                int rowCount = productImgDao.deleteProductImg(pi.getProductImgId(), productId);
+                int rowCount = productImgDao.deleteProductImg(productId);
                 assertEquals(1, rowCount);
             }
         }

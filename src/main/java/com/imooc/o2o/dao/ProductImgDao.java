@@ -13,5 +13,11 @@ public interface ProductImgDao {
      * @return
      */
     int batchInsertProductImg(@Param("productImgList") List<ProductImg> productImgList);
-    int deleteProductImg(@Param("productImgId") long productImgId, @Param("productId") long productId);
+
+    /**
+     * 删除指定商品下的所有详情图
+     * @param productId
+     * @return
+     */
+    int deleteProductImg(long productId);
 }
