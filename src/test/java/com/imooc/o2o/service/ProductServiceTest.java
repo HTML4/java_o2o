@@ -52,4 +52,33 @@ public class ProductServiceTest extends BaseTest {
         ProductExecution pe = productService.addProduct(product, thumbnail, productImgList);
         assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
     }
+    @Test
+    public void testModifyProduct() throws ProductOperationException, FileNotFoundException{
+        Product product = new Product();
+        Shop shop = new Shop();
+        shop.setShopId(1L);
+        ProductCategory productCategory = new ProductCategory();
+        productCategory.setProductCategoryId(5L);
+        product.setProductId(5L);
+        product.setShop(shop);
+        product.setProductCategory(productCategory);
+        product.setProductName("页面添加2");
+        product.setProductDesc("测试商品2");
+        product.setPriority(20);
+        product.setEnableStatus(ProductStateEnum.SUCCESS.getState());
+        File thumbnailFile = new File("D:\\code\\hcredits-frontend\\build\\images\\logo.png");
+        InputStream is = new FileInputStream(thumbnailFile);
+        ImageHolder thumbnail = new ImageHolder(thumbnailFile.getName(), is);
+        //创建两个商品详情图文件流并将它们添加到详情图列表中
+        File productImg1 = new File("D:\\code\\hcredits-frontend\\build\\images\\logo.png");
+        InputStream is1 = new FileInputStream(thumbnailFile);
+        File productImg2 = new File("D:\\code\\hcredits-frontend\\build\\images\\logo.png");
+        InputStream is2 = new FileInputStream(thumbnailFile);
+        List<ImageHolder> productImgList = new ArrayList<ImageHolder>();
+        productImgList.add(new ImageHolder(productImg1.getName(), is1));
+        productImgList.add(new ImageHolder(productImg2.getName(), is2));
+
+        ProductExecution pe = productService.modifyProudct(product, thumbnail, productImgList);
+        assertEquals(ProductStateEnum.SUCCESS.getState(), pe.getState());
+    }
 }

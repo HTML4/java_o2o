@@ -85,18 +85,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductExecution queryProudctById(long productId) {
+    public Product queryProudctById(long productId) {
         Product product = productDao.queryProductByProductId(productId);
-        ProductExecution pe = new ProductExecution();
-        if(product != null) {
-            pe.setState(ProductStateEnum.SUCCESS.getState());
-            pe.setStateInfo(ProductStateEnum.SUCCESS.getStateInfo());
-            pe.setProduct(product);
-        } else {
-            pe.setState(ProductStateEnum.INNER_ERROR.getState());
-            pe.setStateInfo(ProductStateEnum.INNER_ERROR.getStateInfo());
-        }
-        return pe;
+
+        return product;
     }
 
     @Override
@@ -153,8 +145,8 @@ public class ProductServiceImpl implements ProductService {
             String imgAddr = ImageUtil.generateNormalImg(productImgHolder, dest);
             ProductImg productImg = new ProductImg();
             productImg.setImgAddr(imgAddr);
-            product.setProductId(product.getProductId());
-            product.setCreateTime(new Date());
+            productImg.setProductId(product.getProductId());
+            productImg.setCreateTime(new Date());
             productImgList.add(productImg);
         }
         //如果确实是有图片需要添加的，就执行批量添加操作

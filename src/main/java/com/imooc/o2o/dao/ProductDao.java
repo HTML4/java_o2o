@@ -30,4 +30,6 @@ public interface ProductDao {
     List<Product> queryProductList(@Param("shopId") long shopId, @Param("rowIndex") int rowIndex, @Param("pageSize") int pageSize);
 
     int queryProductCount(long shopId);
+
+    int updateProductCategoryToNull(long productCategoryId);
 }

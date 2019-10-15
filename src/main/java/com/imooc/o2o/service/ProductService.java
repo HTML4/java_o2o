@@ -18,7 +18,7 @@ public interface ProductService {
      */
     ProductExecution addProduct(Product product, ImageHolder thumbnail, List<ImageHolder> productImgHolderList) throws ProductOperationException;
     ProductExecution queryProductList(long shopId, int pageIndex, int pageSize);
-    ProductExecution queryProudctById(long productId);
+    Product queryProudctById(long productId);
 
     /**
      * 修改商品信息以及图片处理
