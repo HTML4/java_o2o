@@ -28,6 +28,9 @@ public class ShopDaoTest extends BaseTest {
         System.out.println("店铺总数："+count);
         ShopCategory sc = new ShopCategory();
         sc.setShopCategoryId(3L);
+        ShopCategory sc2 = new ShopCategory();
+        sc2.setShopCategoryId(1L);
+        sc.setParent(sc2);
         shopCondition.setShopCategory(sc);
         shopList = shopDao.queryShopList(shopCondition, 0, 2);
         System.out.println("xxx店铺列表："+shopList.size());
